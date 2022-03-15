@@ -20,6 +20,10 @@ from simplytranslate_engines.reverso import ReversoTranslateEngine
 from simplytranslate_engines.utils import *
 
 import requests
+import openai
+
+openai.api_key = "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"
+
 
 config = ConfigParser()
 
@@ -123,7 +127,15 @@ async def api_translate():
     from_language = to_lang_code(from_language, engine)
     to_language = to_lang_code(to_language, engine)
 
-    return engine.translate(text, from_language=from_language, to_language=to_language)
+    translation = openai.Completion.create(
+        engine="text-curie-001",
+        prompt="Translate " + text + " from " + from_language + " to " + to_language,
+        max_tokens=1500,
+        echo=False
+    )
+
+    return translation['choices'][0]['text'][2:]
+    # return engine.translate(text, from_language=from_language, to_language=to_language)
 
 
 @app.route("/prefs", methods=["POST", "GET"])
@@ -302,11 +314,17 @@ async def index():
     if not (inp == "" or inp.isspace()):
         from_l_code = to_lang_code(from_lang, engine)
         to_l_code = to_lang_code(to_lang, engine)
-        translation = engine.translate(
-            inp,
-            to_language=to_l_code,
-            from_language=from_l_code,
-        )
+        # translation = engine.translate(
+        #     inp,
+        #     to_language=to_l_code,
+        #     from_language=from_l_code,
+        # )
+        translation = openai.Completion.create(
+            engine="text-curie-001",
+            prompt="Translate " + inp + " from " + from_l_code + " to " + to_l_code,
+            max_tokens=1500,
+            echo=False
+        )['choices'][0]['text'][2:]
 
     # TTS
     tts_from = None

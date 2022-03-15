@@ -19,7 +19,7 @@
 
 <html lang="en">
     <head>
-        <title>SimplyTranslate</title>
+        <title>GPT-3-Translee</title>
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
         <meta name="description" content="Experience simple and private Google translations">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,7 +97,7 @@
 
         @media screen and (prefers-color-scheme: dark) {
             body {
-                background-color: #212529;
+                background-color: #154473;
                 color: #f8f9fa;
             }
 
@@ -130,7 +130,7 @@
     <body>
 
         <center>
-            <header><h1>SimplyTranslate</h1></header>
+            <header><h1>GPT-3-Translee</h1></header>
         </center>
 
         <form action="/?engine={{ engine }}" method="POST" id="translation-form">
@@ -235,12 +235,7 @@
 
             <center>
                 <!-- translate button -->
-                <button type="submit">Translate with {{ engine }}!</button>
-
-                <br>
-                <br>
-                <!-- link to share translation -->
-                <a href="/?engine={{ engine }}&text={{ inp|urlencode }}&sl={{ from_l_code }}&tl={{ to_l_code }}">Copy this link to share this translation with others</a>
+                <button type="submit">Translate with GPT-3!</button>
             </center>
 
         </form>
@@ -251,7 +246,7 @@
 
         <footer>
             <center>
-                <a href="/prefs">Preferences</a> | <a target="_new" href="https://simple-web.org/projects/simplytranslate.html">Project Page</a> | <a href="https://simple-web.org">Simple Web Project</a>
+                <a href="/prefs">Preferences</a>
             </center>
         </footer>
 
